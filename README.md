@@ -2,3 +2,9 @@
 
 # X-Token
  App de python para extaer tokens de la moodles
+
+## 📦 Para compilar la app usar el sigiente comando
+
+```console
+flet pack main.py --name XToken --icon icon.ico --product-name XToken --product-version "1.0.0" --copyright "Copyright (c) 2023 XCorporations Inc."
+```
