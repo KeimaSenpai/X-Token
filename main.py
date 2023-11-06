@@ -1,21 +1,27 @@
 import flet as ft
-import asyncio
+from flet import alignment, Container, alignment, Page, Stack, Column, ElevatedButton, TextField, Image
 import requests
 import re
 
 
-async def main(page: ft.Page):
+def main(page: Page):
     global url, username, password, btn
     page.title = "XToken"
     page.window_width = 390
-    page.window_height = 390
+    page.window_height = 400
     page.window_resizable = False
     page.padding = 0
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
-    async def on_submit(e):
-        await extract_token(url, username, password)
+    def on_submit(e):
+        try:
+            token = extract_token(url, username, password)
+            save_token(token)
+        except:
+            print('No se pudo hacer nada')
 
-    async def extract_token(url, username, password):
+    def extract_token(url, username, password):
         # Hacer una solicitud HTTP a la página de inicio de sesión de Moodle
         session = requests.Session()
         login_url = url.value + '/login/index.php'
@@ -37,40 +43,56 @@ async def main(page: ft.Page):
         }
         response = session.post(login_url, data=data)
 
-        # Buscar el token de sesión en las cookies
         if 'MoodleSession' not in session.cookies:
             raise ValueError('No se pudo encontrar el token de sesión')
         session_token = session.cookies['MoodleSession']
         return session_token
 
-    async def save_token(token):
-        # Guardar el token en un archivo de texto
+    def save_token(token):
+        print(token)
         with open('token.txt', 'w') as f:
             f.write(token)
 
-    logo = ft.Image('bg.png', height=130)
-    url = ft.TextField(label='URL Moodle', height=40,
-                       text_size=15, border_color='#FF0066', border_radius=10)
-    username = ft.TextField(label='Ususario', height=40,
-                            text_size=15, border_color='#FF0066', border_radius=10)
-    password = ft.TextField(label='Contraseña', height=40,
-                            text_size=15, border_color='#FF0066', border_radius=10)
-    btn = ft.ElevatedButton(text='Generar', color='#D41872',
-                            bgcolor='#191919', on_click=on_submit, data=page)
+    logo = Image('bg.png', height=130)
+    url = TextField(label='URL Moodle', height=40,
+                    text_size=15, border_color='#FF0066', border_radius=10)
+    username = TextField(label='Ususario', height=40,
+                         text_size=15, border_color='#FF0066', border_radius=10)
+    password = TextField(label='Contraseña', height=40,
+                         text_size=15, border_color='#FF0066', border_radius=10, password=True, can_reveal_password=True)
+    btn = Container(ElevatedButton(text='Generar', color='#D41872',
+                                   bgcolor='#191919', on_click=on_submit, data=page), margin=10)
 
     # Centro
     contenido = ft.Column([
-        logo,
         url,
         username,
-        password,
-        btn
+        password
     ])
 
-    # Fondo de la app
-    fondo = ft.Container(contenido, width=390, height=390,
-                         bgcolor='#191919', padding=20)
-    await page.add_async(fondo)
+    def column_with_horiz_alignment(align: ft.CrossAxisAlignment):
+        return Column(
+            [
+                Container(
+                    Column([logo, contenido, btn],
+                           alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                           horizontal_alignment=align,
+                           ),
+                ),
+            ]
+        )
+
+    page.add(Stack([
+        ft.Row(
+            [
+                column_with_horiz_alignment(ft.CrossAxisAlignment.CENTER)
+            ],
+            spacing=10,
+            alignment=ft.MainAxisAlignment.CENTER,
+        )
+    ]),
+
+    )
 
 
-ft.app(target=main)
+ft.app(target=main, assets_dir="assets")
