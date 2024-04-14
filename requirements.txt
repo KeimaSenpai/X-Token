@@ -1,0 +1,5 @@
+flet
+Pillow
+pyinstaller
+requests
+beautifulsoup4
