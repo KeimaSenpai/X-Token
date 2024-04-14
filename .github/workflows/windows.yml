@@ -15,9 +15,13 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.16.8' # La versión de Flutter que estás utilizando
     - name: Build with flet
       run: |
-        flet pack main.py --name XToken --icon icon.ico --product-name XToken --product-version "1.0.1" --copyright "Copyright (c) 2024 KeimaSenpai."
+        flet build main.py --project XToken --product XToken --build-number "1.0.1" --build-version "1.0.1" --copyright "Copyright (c) 2024 KeimaSenpai."
 
     - name: Create Release
       id: create_release
