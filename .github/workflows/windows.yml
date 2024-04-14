@@ -21,7 +21,7 @@ jobs:
         flutter-version: '3.16.8' # La versión de Flutter que estás utilizando
     - name: Build with flet
       run: |
-        flet build main.py --project XToken --product XToken --build-number "1.0.1" --build-version "1.0.1" --copyright "Copyright (c) 2024 KeimaSenpai."
+        flet build windows --project XToken --product XToken --build-number "1.0.1" --build-version "1.0.1" --copyright "Copyright (c) 2024 KeimaSenpai."
 
     - name: Create Release
       id: create_release
