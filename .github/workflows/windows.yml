@@ -44,6 +44,3 @@ jobs:
         asset_path: dist/XToken.exe
         asset_name: XToken.exe
         asset_content_type: application/exe
-        asset_path: dist/XToken.exe
-        asset_name: XToken.exe
-        asset_content_type: application/exe
