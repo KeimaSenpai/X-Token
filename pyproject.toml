@@ -1,0 +1,19 @@
+[project]
+name = "XToken"
+version = "1.0.0"
+description = "App para crear token de moodles"
+authors = [
+  {name = "KeimaSenpai", email = "KeimaSenpai@proton.me"}
+]
+dependencies = [
+  "flet", 
+  "requests"
+]
+
+[tool.flet]
+org = "com.bytebloom" # --org
+product = "XToken" # --product
+company = "ByteBloom" # --company
+copyright = "Copyright (C) 2024 by ByteBloom" # --copyright
+build_number = 1 # --build-number
+permissions = ["camera", "microphone"] # --permissions
