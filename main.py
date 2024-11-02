@@ -1,5 +1,4 @@
 import json
-import time
 import flet as ft
 import requests
 
@@ -102,13 +101,13 @@ def main(page: ft.Page):
     )
 
     info_text = ''' 
-XToken creado por ByteBloom. El cual permite la descargar y subir contenido sin gasto de megas. Todo es por una suscripción para poder disfrutar de todo en la app. 
+XToken creado por KeimaSenpai. El cual permite la descargar y subir contenido sin gasto de megas. Todo es por una suscripción para poder disfrutar de todo en la app. 
 
 '''
 
     dlg = ft.AlertDialog(
         title=ft.Text(
-            f"XToken 1.0.1",
+            f"XToken 1.0.2",
             size=15,
             ),
         content=ft.Column(
