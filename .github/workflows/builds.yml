@@ -37,7 +37,7 @@ jobs:
     - name: Flet Build Windows
       run: |
         flutter config --no-analytics
-        flet build windows --verbose --no-rich-output --build-number=$env:BUILD_NUMBER --build-version=$env:BUILD_VERSION
+        flet build windows --verbose --no-rich-output --build-number=$env:BUILD_NUMBER --build-version=$env:BUILD_VERSION --project XToken --product XToken --copyright "Copyright (c) 2024 KeimaSenpai"
 
     - name: Upload Windows Artifact
       uses: actions/upload-artifact@v4.3.4
