@@ -79,7 +79,7 @@ jobs:
     - name: Flet Build APK
       run: |
         flutter config --no-analytics
-        flet build apk --verbose --build-number=$BUILD_NUMBER --build-version=$BUILD_VERSION --product XLink --org com.bytebloom
+        flet build apk --verbose --build-number=$BUILD_NUMBER --build-version=$BUILD_VERSION --product XToken --org com.bytebloom
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4.3.4
@@ -114,7 +114,7 @@ jobs:
     - name: Flet Build IPA
       run: |
         flutter config --no-analytics
-        flet build ipa --verbose --build-number=$BUILD_NUMBER --build-version=$BUILD_VERSION --product XLink
+        flet build ipa --verbose --build-number=$BUILD_NUMBER --build-version=$BUILD_VERSION --product XToken --org com.bytebloom
 
     - name: Upload IPA Artifact
       uses: actions/upload-artifact@v4.3.4
