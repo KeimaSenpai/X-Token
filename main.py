@@ -6,6 +6,7 @@ import requests
 def main(page: ft.Page):
     global url, username, password, btn
     page.title = "XToken"
+    page.bgcolor='#17191e'
     page.window.width = 390
     page.window.height = 600
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
@@ -14,14 +15,13 @@ def main(page: ft.Page):
     def on_submit(e):
         try:
             token_li = extract_token(url, username, password)
-            print(token_li)
+            text_status.value = f'{token_li}'
             copy_token(token_li)
         except:
-            print('No se pudo hacer nada')
             text_status.value = 'No se pudo generar nada'
             page.update()
 
-    text_status = ft.Text('', color='#FF0066')
+    text_status = ft.Text('', color='#FF0066', selectable=True)
 
     def copy_token(token_li):
         page.set_clipboard(token_li)
@@ -78,7 +78,7 @@ def main(page: ft.Page):
         ft.ElevatedButton(
                 text='Generar', 
                 color='#D41872',
-                bgcolor='#191919', 
+                bgcolor='#23262d', 
                 on_click=on_submit, 
                 data=page,
                 adaptive=True,
@@ -111,12 +111,13 @@ XToken creado por KeimaSenpai. El cual permite la descargar y subir contenido si
             size=15,
             ),
         content=ft.Column(
-            spacing = 5,
+            # spacing = 5,
+            height=230,
             controls=[
                 ft.Image(src='image.png', height=70),
                 ft.Text(info_text,size=12,),
                 ft.Row(
-                    spacing = 4,
+                    # spacing = 4,
                     controls=[
                         ft.IconButton(
                             ft.icons.SEND,
@@ -137,7 +138,10 @@ XToken creado por KeimaSenpai. El cual permite la descargar y subir contenido si
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
         ),
-        adaptive=True
+        bgcolor='#23262d',
+        title_padding=20,
+        adaptive=True,
+        shape=ft.RoundedRectangleBorder(radius=5),
     )
 
     page.appbar = ft.AppBar(
@@ -145,7 +149,7 @@ XToken creado por KeimaSenpai. El cual permite la descargar y subir contenido si
         leading_width=30,
         title=ft.Text("XToken", color='#FF0066', weight=ft.FontWeight.BOLD),
         center_title=False,
-        bgcolor=ft.colors.SURFACE_VARIANT,
+        bgcolor='#23262d',
         actions=[
             ft.IconButton(
                 ft.icons.INFO, 
